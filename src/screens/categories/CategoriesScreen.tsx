@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 // import { Container } from './styles';
 
-export const CategoriesScreen = (props) => {
+export const CategoriesScreen = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
