@@ -1,4 +1,4 @@
-Menu app
+Menu app - In development
 - React native
 - TypeScript
 - Expo (Managed)
