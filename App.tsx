@@ -4,7 +4,11 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
-import { MealsFavTabNavigator } from './src/navigation/MealsNavigator';
+import {
+  AndroidMealsFavTabNavigator,
+  MealsFavTabNavigator,
+} from './src/navigation/MealsNavigator';
+import { Platform } from 'react-native';
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -28,7 +32,11 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <MealsFavTabNavigator />
+      {Platform.OS === 'android' ? (
+        <AndroidMealsFavTabNavigator />
+      ) : (
+        <MealsFavTabNavigator />
+      )}
     </NavigationContainer>
   );
 }

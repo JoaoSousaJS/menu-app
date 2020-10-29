@@ -3,6 +3,7 @@ import React from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import { CategoriesScreen } from '../screens/categories/CategoriesScreen';
@@ -20,6 +21,7 @@ import Color from '../constants/Color';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<RootTabParamList>();
+const AndroidTab = createMaterialBottomTabNavigator<RootTabParamList>();
 
 export const MealsNavigatorStack = () => {
   return (
@@ -57,6 +59,35 @@ export const MealsNavigatorStack = () => {
         })}
       />
     </Stack.Navigator>
+  );
+};
+
+export const AndroidMealsFavTabNavigator = () => {
+  return (
+    <AndroidTab.Navigator shifting={true} activeColor={'white'}>
+      <AndroidTab.Screen
+        name="Meals"
+        component={MealsNavigatorStack}
+        options={{
+          tabBarColor: Color.primaryColor,
+          tabBarIcon: (tabInfo) => {
+            return (
+              <Ionicons name="ios-restaurant" size={25} color={tabInfo.color} />
+            );
+          },
+        }}
+      />
+      <AndroidTab.Screen
+        name="Favorite"
+        component={FavoritesScreen}
+        options={{
+          tabBarColor: Color.accentColor,
+          tabBarIcon: (tabInfo) => {
+            return <Ionicons name="ios-star" size={25} color={tabInfo.color} />;
+          },
+        }}
+      />
+    </AndroidTab.Navigator>
   );
 };
 
