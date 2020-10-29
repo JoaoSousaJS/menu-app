@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
-import { MealsNavigatorStack } from './src/navigation/MealsNavigator';
+import { MealsFavTabNavigator } from './src/navigation/MealsNavigator';
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <MealsNavigatorStack />
+      <MealsFavTabNavigator />
     </NavigationContainer>
   );
 }
