@@ -18,10 +18,12 @@ import { optionsMealsScreen } from './ScreenOptions/MealsScreen';
 import { FavoritesScreen } from '../screens/favorites/FavoritesScreen';
 import { RootTabParamList } from '../types/tabNavigator/RouteParamList';
 import Color from '../constants/Color';
+import { FavStackParamList } from '../types/favStackNavigator/RouteParamList';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<RootTabParamList>();
 const AndroidTab = createMaterialBottomTabNavigator<RootTabParamList>();
+const FavStack = createStackNavigator<FavStackParamList>();
 
 export const MealsNavigatorStack = () => {
   return (
@@ -62,6 +64,19 @@ export const MealsNavigatorStack = () => {
   );
 };
 
+const FavStackNavigator = () => {
+  return (
+    <FavStack.Navigator screenOptions={optionsMealsScreen}>
+      <FavStack.Screen
+        name="Favorite"
+        component={FavoritesScreen}
+        options={{ headerTitle: 'Your Favorites' }}
+      />
+      <FavStack.Screen name="MealDetail" component={MealDetailScreen} />
+    </FavStack.Navigator>
+  );
+};
+
 export const AndroidMealsFavTabNavigator = () => {
   return (
     <AndroidTab.Navigator shifting={true} activeColor={'white'}>
@@ -79,7 +94,7 @@ export const AndroidMealsFavTabNavigator = () => {
       />
       <AndroidTab.Screen
         name="Favorite"
-        component={FavoritesScreen}
+        component={FavStackNavigator}
         options={{
           tabBarColor: Color.accentColor,
           tabBarIcon: (tabInfo) => {
@@ -107,7 +122,7 @@ export const MealsFavTabNavigator = () => {
       />
       <Tab.Screen
         name="Favorite"
-        component={FavoritesScreen}
+        component={FavStackNavigator}
         options={{
           tabBarIcon: (tabInfo) => {
             return <Ionicons name="ios-star" size={25} color={tabInfo.color} />;
