@@ -10,9 +10,19 @@ import { CategoriesMealsScreen } from '../../../screens/categoryMeal/CategoryMea
 import { MealDetailScreen } from '../../../screens/mealDetail/MealDetailScreen';
 import { CustomHeaderButton } from '../../../components/HeaderButton/Header';
 import { FavoritesScreen } from '../../../screens/favorites/FavoritesScreen';
+import { FilterScreen } from '../../../screens/filter/FiltersScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const FavStack = createStackNavigator<FavStackParamList>();
+const FilterStack = createStackNavigator();
+
+export const FilterNavigatorStack = () => {
+  return (
+    <FilterStack.Navigator>
+      <FilterStack.Screen name="filter" component={FilterScreen} />
+    </FilterStack.Navigator>
+  );
+};
 
 export const MealsNavigatorStack = () => {
   return (

@@ -5,11 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
-import { Platform } from 'react-native';
-import {
-  AndroidMealsFavTabNavigator,
-  MealsFavTabNavigator,
-} from './src/navigation/Navigators/tab';
+import { MainNavigatorDrawer } from './src/navigation/Navigators/drawer';
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -33,11 +29,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {Platform.OS === 'android' ? (
-        <AndroidMealsFavTabNavigator />
-      ) : (
-        <MealsFavTabNavigator />
-      )}
+      <MainNavigatorDrawer />
     </NavigationContainer>
   );
 }
