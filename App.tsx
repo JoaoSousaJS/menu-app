@@ -4,11 +4,12 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
+
+import { Platform } from 'react-native';
 import {
   AndroidMealsFavTabNavigator,
   MealsFavTabNavigator,
-} from './src/navigation/MealsNavigator';
-import { Platform } from 'react-native';
+} from './src/navigation/Navigators/tab';
 
 const fetchFonts = () => {
   return Font.loadAsync({
