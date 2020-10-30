@@ -1,6 +1,6 @@
 export type FavStackParamList = {
   Favorite: undefined;
-  MealDetail: {
+  mealDetail: {
     mealId: string;
     title: string;
   };

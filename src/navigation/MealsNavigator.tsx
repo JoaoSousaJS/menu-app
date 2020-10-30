@@ -72,7 +72,7 @@ const FavStackNavigator = () => {
         component={FavoritesScreen}
         options={{ headerTitle: 'Your Favorites' }}
       />
-      <FavStack.Screen name="MealDetail" component={MealDetailScreen} />
+      <FavStack.Screen name="mealDetail" component={MealDetailScreen} />
     </FavStack.Navigator>
   );
 };
