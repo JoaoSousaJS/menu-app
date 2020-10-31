@@ -10,5 +10,8 @@ export type RootStackParamList = {
   mealDetail: {
     mealId: string;
     title: string;
+    duration: number;
+    complexity: string;
+    affordability: string;
   };
 };
