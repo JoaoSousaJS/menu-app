@@ -3,6 +3,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { Text } from 'react-native';
 
 import Color from '../../../constants/Color';
 import { RootTabParamList } from '../../../types/tabNavigator/RouteParamList';
@@ -19,6 +20,9 @@ export const AndroidMealsFavTabNavigator = () => {
         component={MealsNavigatorStack}
         options={{
           tabBarColor: Color.primaryColor,
+          tabBarLabel: (
+            <Text style={{ fontFamily: 'open-sans-bold' }}>Meals</Text>
+          ),
           tabBarIcon: (tabInfo) => {
             return (
               <Ionicons name="ios-restaurant" size={25} color={tabInfo.color} />
@@ -30,6 +34,7 @@ export const AndroidMealsFavTabNavigator = () => {
         name="Favorite"
         component={FavStackNavigator}
         options={{
+          title: 'Favorites',
           tabBarColor: Color.accentColor,
           tabBarIcon: (tabInfo) => {
             return <Ionicons name="ios-star" size={25} color={tabInfo.color} />;
@@ -42,7 +47,14 @@ export const AndroidMealsFavTabNavigator = () => {
 
 export const MealsFavTabNavigator = () => {
   return (
-    <Tab.Navigator tabBarOptions={{ activeTintColor: Color.accentColor }}>
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: Color.accentColor,
+        labelStyle: {
+          fontFamily: 'open-sans-bold',
+        },
+      }}
+    >
       <Tab.Screen
         name="Meals"
         component={MealsNavigatorStack}
@@ -58,6 +70,7 @@ export const MealsFavTabNavigator = () => {
         name="Favorite"
         component={FavStackNavigator}
         options={{
+          title: 'Favorites',
           tabBarIcon: (tabInfo) => {
             return <Ionicons name="ios-star" size={25} color={tabInfo.color} />;
           },
