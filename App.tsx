@@ -2,10 +2,19 @@ import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
 import { MainNavigatorDrawer } from './src/navigation/Navigators/drawer';
+import { mealsReducer } from './src/store/reducers/meals';
+
+const rootReducer = combineReducers({
+  meals: mealsReducer,
+});
+
+const store = createStore(rootReducer);
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -29,7 +38,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <MainNavigatorDrawer />
+      <Provider store={store}>
+        <MainNavigatorDrawer />
+      </Provider>
     </NavigationContainer>
   );
 }
