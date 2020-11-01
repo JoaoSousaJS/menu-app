@@ -13,19 +13,21 @@ import { CustomHeaderButton } from '../../../components/HeaderButton/Header';
 import { FavoritesScreen } from '../../../screens/favorites/FavoritesScreen';
 import { FilterScreen } from '../../../screens/filter/FiltersScreen';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { FilterStackParamList } from '../../../types/filterStackNavigator/RouteParamList';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const FavStack = createStackNavigator<FavStackParamList>();
-const FilterStack = createStackNavigator();
+const FilterStack = createStackNavigator<FilterStackParamList>();
 
 export const FilterNavigatorStack = () => {
   const navigation = useNavigation();
+
   return (
     <FilterStack.Navigator>
       <FilterStack.Screen
         name="filter"
         component={FilterScreen}
-        options={{
+        options={({ route }) => ({
           ...optionsMealsScreen,
           title: 'Filter Meals',
           headerLeft: () => (
@@ -37,7 +39,14 @@ export const FilterNavigatorStack = () => {
               </HeaderButtons>
             </TouchableOpacity>
           ),
-        }}
+          headerRight: () => (
+            <TouchableOpacity onPress={() => route.params.save()}>
+              <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item title="Save" iconName="ios-save" />
+              </HeaderButtons>
+            </TouchableOpacity>
+          ),
+        })}
       />
     </FilterStack.Navigator>
   );

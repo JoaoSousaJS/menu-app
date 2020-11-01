@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, Switch, Platform } from 'react-native';
 import Color from '../../constants/Color';
+import { FilterProps } from '../../types/filterStackNavigator/favorite-stack-types';
 
 // import { Container } from './styles';
 interface IProps {
@@ -23,11 +24,27 @@ const FilterSwitch = (props: IProps) => {
   );
 };
 
-export const FilterScreen = () => {
+export const FilterScreen = ({ route, navigation }: FilterProps) => {
   const [isGlutenFree, setIsGlutenFree] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
+
+  const saveFilters = useCallback(() => {
+    const appliedFilters = {
+      glutenFree: isGlutenFree,
+      lactoseFree: isLactoseFree,
+      veganFree: isVegan,
+      vegetarianFree: isVegetarian,
+    };
+    console.log('filters');
+    console.log(appliedFilters);
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+
+  useEffect(() => {
+    console.log('useeffect');
+    navigation.setParams({ save: saveFilters });
+  }, [saveFilters, navigation]);
 
   return (
     <View style={styles.container}>
