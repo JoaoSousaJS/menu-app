@@ -1,12 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import MealList from '../../components/MealList/MealList';
-import { MEALS } from '../../data/dummy-data';
+import { IStateMeals } from '../../store/types/meals';
 import { CategoriesProps } from '../../types/stackNavigator/categories-screen-types';
 
 // import { Container } from './styles';
 
-export const FavoritesScreen = ({ route, navigation }: CategoriesProps) => {
-  const favMeals = MEALS.filter((meal) => meal.id === 'm1' || meal.id === 'm2');
+export const FavoritesScreen = ({ navigation }: CategoriesProps) => {
+  const favMeals = useSelector(
+    (state: IStateMeals) => state.meals.favoriteMeals,
+  );
 
   return <MealList listData={favMeals} navigation={navigation} />;
 };
