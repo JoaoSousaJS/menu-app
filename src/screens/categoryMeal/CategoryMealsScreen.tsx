@@ -1,6 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import MealList from '../../components/MealList/MealList';
-import { MEALS } from '../../data/dummy-data';
+import { IStateMeals } from '../../store/types/meals';
 import { CategoriesProps } from '../../types/stackNavigator/categories-screen-types';
 
 // import { Container } from './styles';
@@ -11,8 +12,11 @@ export const CategoriesMealsScreen = ({
 }: CategoriesProps) => {
   const { categoryId } = route.params;
   // const selectedCategories = CATEGORIES.find((cat) => cat.id === categoryId);
+  const availableMeals = useSelector(
+    (state: IStateMeals) => state.meals.filteredMeals,
+  );
 
-  const displayedMeals = MEALS.filter(
+  const displayedMeals = availableMeals.filter(
     (meal) => meal.categoryIds.indexOf(categoryId) >= 0,
   );
 
