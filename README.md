@@ -7,8 +7,9 @@ Menu app
 
 git clone the repo
 
+change dummy data to your api
+
 yarn install
 
 yarn ios/android
 
-change dummy data to your api
