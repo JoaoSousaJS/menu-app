@@ -13,5 +13,6 @@ export type RootStackParamList = {
     duration: number;
     complexity: string;
     affordability: string;
+    toggleFav: () => void;
   };
 };

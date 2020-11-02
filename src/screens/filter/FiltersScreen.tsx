@@ -37,12 +37,9 @@ export const FilterScreen = ({ route, navigation }: FilterProps) => {
       veganFree: isVegan,
       vegetarianFree: isVegetarian,
     };
-    console.log('filters');
-    console.log(appliedFilters);
   }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
 
   useEffect(() => {
-    console.log('useeffect');
     navigation.setParams({ save: saveFilters });
   }, [saveFilters, navigation]);
 

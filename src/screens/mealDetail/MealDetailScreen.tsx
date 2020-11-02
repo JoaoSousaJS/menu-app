@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DefaultText } from '../../components/DefaultText/DefaultText';
+import { toggleFavorite } from '../../store/actions/meals';
 import { IStateMeals } from '../../store/types/meals';
 import { MealDetailsProps } from '../../types/stackNavigator/meal-details-screen-types';
 // import { Container } from './styles';
@@ -14,12 +15,22 @@ const ListItem = (props: any) => {
   );
 };
 
-export const MealDetailScreen = ({ route }: MealDetailsProps) => {
+export const MealDetailScreen = ({ route, navigation }: MealDetailsProps) => {
   const { mealId } = route.params;
 
   const availableMeals = useSelector((state: IStateMeals) => state.meals.meals);
 
   const selectedMeals = availableMeals.find((meal) => meal.id === mealId);
+
+  const dispatch = useDispatch();
+
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(toggleFavorite(mealId));
+  }, [dispatch, mealId]);
+
+  useEffect(() => {
+    navigation.setParams({ toggleFav: toggleFavoriteHandler });
+  }, [toggleFavoriteHandler, navigation]);
 
   return (
     <ScrollView>

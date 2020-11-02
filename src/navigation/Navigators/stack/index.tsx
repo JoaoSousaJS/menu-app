@@ -89,15 +89,11 @@ export const MealsNavigatorStack = () => {
         options={({ route }) => ({
           headerTitle: route.params.title,
           headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-              <Item
-                title="Favorite"
-                iconName="ios-star"
-                onPress={() => {
-                  console.log('Mark as Favorite');
-                }}
-              />
-            </HeaderButtons>
+            <TouchableOpacity onPress={() => route.params.toggleFav()}>
+              <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item title="Favorite" iconName="ios-star" />
+              </HeaderButtons>
+            </TouchableOpacity>
           ),
         })}
       />
