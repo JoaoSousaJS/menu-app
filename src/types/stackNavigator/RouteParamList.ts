@@ -14,5 +14,6 @@ export type RootStackParamList = {
     complexity: string;
     affordability: string;
     toggleFav: () => void;
+    isFav: boolean;
   };
 };

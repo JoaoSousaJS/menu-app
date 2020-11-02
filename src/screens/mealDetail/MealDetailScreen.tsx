@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { DefaultText } from '../../components/DefaultText/DefaultText';
+import { Meal } from '../../models/meal/meal';
 import { toggleFavorite } from '../../store/actions/meals';
 import { IStateMeals } from '../../store/types/meals';
 import { MealDetailsProps } from '../../types/stackNavigator/meal-details-screen-types';
@@ -17,7 +18,9 @@ const ListItem = (props: any) => {
 
 export const MealDetailScreen = ({ route, navigation }: MealDetailsProps) => {
   const { mealId } = route.params;
-
+  const currentMealIsFavorite = useSelector((state: IStateMeals) =>
+    state.meals.favoriteMeals.some((meal: Meal) => meal.id === mealId),
+  );
   const availableMeals = useSelector((state: IStateMeals) => state.meals.meals);
 
   const selectedMeals = availableMeals.find((meal) => meal.id === mealId);
@@ -31,6 +34,10 @@ export const MealDetailScreen = ({ route, navigation }: MealDetailsProps) => {
   useEffect(() => {
     navigation.setParams({ toggleFav: toggleFavoriteHandler });
   }, [toggleFavoriteHandler, navigation]);
+
+  useEffect(() => {
+    navigation.setParams({ isFav: currentMealIsFavorite });
+  }, [currentMealIsFavorite, navigation]);
 
   return (
     <ScrollView>

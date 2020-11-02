@@ -4,6 +4,8 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { RootStackParamList } from '../../types/stackNavigator/RouteParamList';
 import { MealItem } from '../MealItem/MealItem';
 import { Meal } from '../../models/meal/meal';
+import { useSelector } from 'react-redux';
+import { IStateMeals } from '../../store/types/meals';
 
 // import { Container } from './styles';
 
@@ -24,7 +26,14 @@ interface IItemData {
 }
 
 const MealList = (props: PropsMealList) => {
+  const favoriteMeals = useSelector(
+    (state: IStateMeals) => state.meals.favoriteMeals,
+  );
+
   const renderMealItem = (itemData: IItemData) => {
+    const isFavorite = favoriteMeals.some(
+      (meal: Meal) => meal.id === itemData.item.id,
+    );
     return (
       <MealItem
         duration={itemData.item.duration}
@@ -33,6 +42,7 @@ const MealList = (props: PropsMealList) => {
           props.navigation.navigate('mealDetail', {
             mealId: itemData.item.id,
             title: itemData.item.title,
+            isFav: isFavorite,
           })
         }
         complexity={itemData.item.complexity}

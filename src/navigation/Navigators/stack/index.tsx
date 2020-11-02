@@ -91,7 +91,12 @@ export const MealsNavigatorStack = () => {
           headerRight: () => (
             <TouchableOpacity onPress={() => route.params.toggleFav()}>
               <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-                <Item title="Favorite" iconName="ios-star" />
+                <Item
+                  title="Favorite"
+                  iconName={
+                    route.params.isFav ? 'ios-star' : 'ios-star-outline'
+                  }
+                />
               </HeaderButtons>
             </TouchableOpacity>
           ),
