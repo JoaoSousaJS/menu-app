@@ -1,6 +1,6 @@
 Menu app 
 - React native
-- TypeScript
+- TypeScript 
 - Expo (Managed)
 - React navigation v5
 - Redux

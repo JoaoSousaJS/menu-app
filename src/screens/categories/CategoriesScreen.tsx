@@ -1,29 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { FlatList } from 'react-native';
 import { CategoriesProps } from '../../types/stackNavigator/categories-screen-types';
-import { CATEGORIES } from '../../data/dummy-data';
 import { CategoryGridTile } from '../../components/CategoryGrid/CategoryGridTile';
 
 // import { Container } from './styles';
 
 interface IItemdata {
   item: {
+    _id: string;
     title: string;
-    id: string;
     color: string;
   };
 }
 
 export const CategoriesScreen = ({ navigation }: CategoriesProps) => {
+  const [categories, setCategories] = useState({
+    _id: '',
+    title: '',
+    color: '',
+  });
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/v1/categories').then((response) => {
+      setCategories(response.data.data.doc);
+    });
+  }, []);
   const renderGridItem = (itemData: IItemdata) => {
+    console.log(itemData.item.color);
     return (
       <CategoryGridTile
         title={itemData.item.title}
-        id={itemData.item.id}
+        id={itemData.item._id}
         color={itemData.item.color}
         onSelect={() =>
           navigation.navigate('categoriesMeals', {
-            categoryId: itemData.item.id,
+            categoryId: itemData.item._id,
             categoryTitle: itemData.item.title,
           })
         }
@@ -31,6 +42,6 @@ export const CategoriesScreen = ({ navigation }: CategoriesProps) => {
     );
   };
   return (
-    <FlatList data={CATEGORIES} renderItem={renderGridItem} numColumns={2} />
+    <FlatList data={categories} renderItem={renderGridItem} numColumns={2} />
   );
 };
